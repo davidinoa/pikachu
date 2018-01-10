@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import SearchIndex from './components/SearchIndex.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,8 +30,13 @@ class App extends React.Component {
     return (<div>
       <h1>Item List</h1>
       <List items={this.state.items}/>
+      <SearchIndex />
     </div>);
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+// search bars
+// search button
+// filters
