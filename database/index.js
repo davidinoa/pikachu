@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/pikachu');
+mongoose.connect('mongodb://localhost/budgetchef');
 
 var db = mongoose.connection;
 
@@ -11,19 +11,27 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var recipeSchema = mongoose.Schema({
+  recipeName: { type: String, required: true }, // title
+  servings: { type: Number, required: true }, // servings
+  servingPrice: { type: Number, required: true }, // pricePerServing
+  recipeUrl: { type: String, required: true }, // sourceUrl
+  imageUrl: { type: String, required: true }, // image
+  popularity: { type: Number }, // aggregateLikes
+  healthScore: { type: Number }, // healthScore
+  cuisines: { type: Array }, // cuisines
+  dishTypes: { type: Array }, // dishTypes
+  diets: { type: Array } // diets
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Recipe = mongoose.model('Recipe', recipeSchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Recipe.find({}, function(err, recipes) {
     if (err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, recipes);
     }
   });
 };
