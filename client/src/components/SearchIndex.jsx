@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import faker from 'faker';
 import React from 'react';
-import { Container, Dropdown, Input, Label, Search } from 'semantic-ui-react';
+import { Button, Container, Input, Label } from 'semantic-ui-react';
 import List from './List.jsx';
 
 const source = _.times(5, () => ({
@@ -54,7 +54,7 @@ class SearchIndex extends React.Component {
       }
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
-      const isMatch = result => {
+      const isMatch = (result) => {
         return re.test(result.title);
       };
 
@@ -91,34 +91,39 @@ class SearchIndex extends React.Component {
     return (
       <div style={{ textAlign: 'center', margin: '0 auto' }}>
         <Container>
-          <Input
-            name="budget"
-            labelPosition="right"
-            type="text"
-            placeholder="Amount"
-            value={this.state.budget}
-            onChange={this.onChange.bind(this)}
-          >
-            <Label basic>$</Label>
-            <input />
-            <Label>.00</Label>
-          </Input>
-          <Input
-            name="servings"
-            label={{ basic: true, content: 'servings' }}
-            labelPosition="right"
-            placeholder="Enter servings..."
-            value={this.state.servings}
-            onChange={this.onChange.bind(this)}
-          />
-          <Input
-            name="keywords"
-            action="Search"
-            placeholder="Search..."
-            value={this.state.keywords}
-            onChange={this.onChange.bind(this)}
-            onSubmit={this.onSubmit.bind(this)}
-          />
+          <form onSubmit={this.onSubmit.bind(this)}>
+            <Input
+              name="budget"
+              labelPosition="right"
+              type="text"
+              placeholder="Amount"
+              value={this.state.budget}
+              onChange={this.onChange.bind(this)}
+            >
+              <Label basic>$</Label>
+              <input />
+              <Label basic>.00</Label>
+            </Input>
+            <Input
+              name="servings"
+              label={{ basic: true, content: 'servings' }}
+              labelPosition="right"
+              placeholder="Enter servings..."
+              value={this.state.servings}
+              onChange={this.onChange.bind(this)}
+            />
+            <Input
+              name="keywords"
+              placeholder="Cuisine (optional)"
+              value={this.state.keywords}
+              onChange={this.onChange.bind(this)}
+            >
+              <input />
+              <Button type="submit" color="olive">
+                Search
+              </Button>
+            </Input>
+          </form>
         </Container>
         <List items={this.state.results} />
       </div>

@@ -15,28 +15,63 @@ class App extends React.Component {
 
   componentDidMount() {
     $.ajax({
+      method: 'GET',
       url: '/items',
-      success: data => {
+      contentType: 'application/json',
+      success: (data) => {
+        console.log('this is component did mount data: ', data);
         this.setState({
           items: data
         });
       },
-      error: err => {
-        console.log('err', err);
+      error: (err) => {
+        console.log('get request error: ', err);
       }
     });
   }
 
-  search(budget, keywords, servings) {}
+  search(budget, keywords, servings) {
+    console.log(`${item} was added`);
+    var that = this;
+    $.ajax({
+      method: 'POST',
+      url: '/items',
+      data: JSON.stringify({
+        budget: budget,
+        keywords: keywords,
+        servings: servings
+      }),
+      contentType: 'application/json'
+    })
+      .done((data) => {
+        // debugger;
+        console.log(
+          'these are the new items, items being set to state: ',
+          data
+        );
+        if (data) {
+          this.setState({ items: [...that.state.items, data] });
+        }
+      })
+      .fail((jqXHR, textStatus, errorThrown) => {
+        console.error(textStatus, 'post request error: ', errorThrown);
+      });
+  }
 
   render() {
     return (
       <div>
-       <Button.Group floated='right'>
-        <Button basic color='olive'>User</Button>
-        <Button basic color='olive'>Favorites</Button>
-        <Button basic color='olive'>Login / Logout</Button>
-         </Button.Group>
+        <Button.Group floated="right">
+          <Button basic color="olive">
+            User
+          </Button>
+          <Button basic color="olive">
+            Favorites
+          </Button>
+          <Button basic color="olive">
+            Login / Logout
+          </Button>
+        </Button.Group>
         <h1 />
         <SearchIndex onSearch={this.search.bind(this)} />
       </div>
