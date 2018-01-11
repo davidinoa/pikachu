@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var getRecipesByKeyword = require('./api_helper').getRecipesByKeyword;
+var getRecipeInfoByIds = require('./api_helper').getRecipeInfoByIds;
 
 if (process.env.NODE_ENV === 'production') {
   mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
@@ -32,23 +34,24 @@ var recipeSchema = mongoose.Schema({
 
 var Recipe = mongoose.model('Recipe', recipeSchema);
 
-var selectAll = function(callback) {
-  Recipe.find({}, function(err, recipes) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, recipes);
-    }
-  });
-};
+// var selectAll = function(callback) {
+//   Recipe.find({}, function(err, recipes) {
+//     if (err) {
+//       callback(err, null);
+//     } else {
+//       callback(null, recipes);
+//     }
+//   });
+// };
 
-var saveToMongo = function(recipes, callback) {
+
+var saveRecipesToMongo = function(recipes, callback) {
   recipes.forEach(function(recipe) {
     new Recipe({
       recipeId: recipe.id,
       recipeName: recipe.title,
       servings: recipe.servings,
-      servingPrice: recipe.pricePerServing,
+      servingPrice: (recipe.pricePerServing / 100).toFixed(2),
       recipeUrl: recipe.sourceUrl,
       imageUrl: recipe.image,
       popularity: recipe.aggregateLikes,
@@ -58,13 +61,41 @@ var saveToMongo = function(recipes, callback) {
       diets: recipe.diets
     })
       .save(function(err) {
-        if (err) { return console.error(err); }
+        if (err) { return console.log('document already exists'); }
         console.log('document saved');
       });
   });
 };
 
-module.exports = {
-  selectAll: selectAll,
-  saveToMongo: saveToMongo,
+const getDataFromAPI = (keyword) => {
+  getRecipesByKeyword(keyword, (err, results) => {
+    console.log('Line 72 ', results);
+    if (err) { return console.error(err); }
+    getRecipeInfoByIds(results, (err, data) => {
+      console.log('Line 75 ', results);
+      console.log('Line 76 ', data);
+      if (err) { return console.error(err); }
+      saveRecipesToMongo(JSON.parse(data));
+    });
+  });
 };
+
+const getRecipesFromMongo = (budget, keyword, callback) => {
+  Recipe.find({recipeName: new RegExp(keyword, 'i')})
+    .where('servingPrice').lt(budget)
+    .sort('popularity')
+    .then((recipes) => {
+      // if (recipes.length < 12) {
+      //   getDataFromAPI(keyword);
+      // }      
+      callback(recipes);
+    })
+    .catch((error) => console.error(error));    
+};
+
+module.exports = {
+  // selectAll: selectAll,
+  saveRecipesToMongo: saveRecipesToMongo,
+  getRecipesFromMongo: getRecipesFromMongo
+};
+
