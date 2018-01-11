@@ -15,22 +15,26 @@ class App extends React.Component {
   componentDidMount() {
     $.ajax({
       url: '/items',
-      success: (data) => {
+      success: data => {
         this.setState({
           items: data
         });
       },
-      error: (err) => {
+      error: err => {
         console.log('err', err);
       }
     });
   }
 
-  render () {
-    return (<div>
-      <h1></h1>
-      <SearchIndex />
-    </div>);
+  search(budget, keywords, servings) {}
+
+  render() {
+    return (
+      <div>
+        <h1 />
+        <SearchIndex onSearch={this.search.bind(this)} />
+      </div>
+    );
   }
 }
 

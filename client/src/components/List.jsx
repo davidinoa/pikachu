@@ -9,8 +9,10 @@ const List = props => (
     {props.items.map((item, i) => {
       return (
         <Grid.Column>
-          <Image src={this.props.images[i]} />
-          <ListItem item={item} onClick={props.onClick} />
+          <a href={item.recipeUrl}>
+            <Image src={item.imageUrl} />
+            <ListItem item={item} onClick={props.onClick} />
+          </a>
         </Grid.Column>
       );
     })}
