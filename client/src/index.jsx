@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import SearchIndex from './components/SearchIndex.jsx';
-import { Button } from 'semantic-ui-react';
+import { Button, Header, Image } from 'semantic-ui-react';
 
 class App extends React.Component {
   constructor(props) {
@@ -73,6 +73,13 @@ class App extends React.Component {
           </Button>
         </Button.Group>
         <h1 />
+        <Header as='h2' icon>
+          <Image src='https://drive.google.com/file/d/1Fa0LLTFj8Vg-lBPGOqizvQhKKuowZtOv/view?usp=sharing' />
+          BudgetChef
+          <Header.Subheader>
+            for when you're cheap AF
+          </Header.Subheader>
+        </Header>
         <SearchIndex onSearch={this.search.bind(this)} />
       </div>
     );
