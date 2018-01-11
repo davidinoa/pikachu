@@ -1,5 +1,16 @@
-const config = require('../config.js');
 const request = require('request');
+let config;
+let PROJECT_KEY;
+let PROJECT_HOST;
+
+if (process.env.NODE_ENV === 'production') {
+  PROJECT_KEY = process.env.PROJECT_KEY;
+  PROJECT_HOST = process.env.PROJECT_HOST;
+} else {
+  config = require('../config.js');
+  PROJECT_KEY = config.PROJECT_KEY;
+  PROJECT_HOST = config.PROJECT_HOST;
+}
 
 // fetch recipes based on budget
 // example: user inputs $20 budget for 2 servings => get recipes with servingPrice of $10 or less.
@@ -10,8 +21,8 @@ let getRecipesByKeyword = (keyword, callback) => {
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&query=' + keyword,
     headers: {
       'User-Agent': 'request',
-      'X-Mashape-Key': config.PROJECT_KEY,
-      'X-Mashape-Host': config.PROJECT_HOST
+      'X-Mashape-Key': PROJECT_KEY,
+      'X-Mashape-Host': PROJECT_HOST
     }
   };
 
