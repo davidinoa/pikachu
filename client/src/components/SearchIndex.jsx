@@ -2,12 +2,13 @@ import _ from 'lodash';
 import faker from 'faker';
 import React from 'react';
 import { Search, Grid, Header } from 'semantic-ui-react';
+import List from './List.jsx';
 
 const source = _.times(5, () => ({
   title: faker.company.companyName(),
   description: faker.company.catchPhrase(),
   image: faker.internet.avatar(),
-  price: faker.finance.amount(0, 100, 2, '$'),
+  price: faker.finance.amount(0, 100, 2, '$')
 }));
 
 class SearchIndex extends React.Component {
@@ -50,13 +51,13 @@ class SearchIndex extends React.Component {
       }
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
-      const isMatch = (result) => {
+      const isMatch = result => {
         return re.test(result.title);
       };
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch),
+        results: _.filter(source, isMatch)
       });
     }, 500);
   }
@@ -65,7 +66,7 @@ class SearchIndex extends React.Component {
     const { isLoading, value, results } = this.state;
 
     return (
-      <div style={{textAlign: 'center', margin: '0 auto'}}>
+      <div style={{ textAlign: 'center', margin: '0 auto' }}>
         <Grid>
           <Grid.Column width={8}>
             <Search
@@ -78,6 +79,10 @@ class SearchIndex extends React.Component {
             />
           </Grid.Column>
         </Grid>
+        <List
+          items={this.state.results}
+          onClick={this.handleResultClick.bind(this)}
+        />
       </div>
     );
   }
