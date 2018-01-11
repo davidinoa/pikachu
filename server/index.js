@@ -1,16 +1,13 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var items = require('../database');
-
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const routes = require('./routes/index');
+const app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use('/', routes);
 
-app.post('/recipes', (req, res) => {
-  // get 12 recipes with user input
-  // send data fetched from Mongo back to the client
-    // error handling 
-});
 
 // For componentDidMount - (possibility)
 // app.get('/recipes', function (req, res) {

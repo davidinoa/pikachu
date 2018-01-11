@@ -41,6 +41,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "request": "^2.83.0",
+    "router-express": "^1.5.2",
     "semantic-ui-react": "^0.77.2",
     "webpack": "^2.2.1"
   }

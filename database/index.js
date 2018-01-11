@@ -69,11 +69,8 @@ var saveRecipesToMongo = function(recipes, callback) {
 
 const getDataFromAPI = (keyword) => {
   getRecipesByKeyword(keyword, (err, results) => {
-    console.log('Line 72 ', results);
     if (err) { return console.error(err); }
     getRecipeInfoByIds(results, (err, data) => {
-      console.log('Line 75 ', results);
-      console.log('Line 76 ', data);
       if (err) { return console.error(err); }
       saveRecipesToMongo(JSON.parse(data));
     });
@@ -85,12 +82,12 @@ const getRecipesFromMongo = (budget, keyword, callback) => {
     .where('servingPrice').lt(budget)
     .sort('popularity')
     .then((recipes) => {
-      // if (recipes.length < 12) {
-      //   getDataFromAPI(keyword);
-      // }      
+      if (recipes.length < 12) {
+        getDataFromAPI(keyword);
+      }
       callback(recipes);
     })
-    .catch((error) => console.error(error));    
+    .catch((error) => console.error(error));
 };
 
 module.exports = {
