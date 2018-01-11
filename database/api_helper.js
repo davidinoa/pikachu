@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
 let getRecipesByKeyword = (keyword, callback) => {
   console.log('getRecipesByKeyword is running');
   let options = {
-    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&query=' + keyword,
+    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=12&query=' + keyword,
     headers: {
       'User-Agent': 'request',
       'X-Mashape-Key': PROJECT_KEY,
@@ -43,7 +43,7 @@ let getRecipesByKeyword = (keyword, callback) => {
 // get recipe info in bulk based on recipe ids.
 let getRecipeInfoByIds = (recipes, callback) => {
   // creates recipeIds for search parameter
-  // recipes = JSON.parse(recipes).results;
+  recipes = JSON.parse(recipes).results;
   let recipeIds = recipes.map((recipe, i) => {
     if (i !== (recipes.length - 1)) {
       return recipe.id + '%2C';
