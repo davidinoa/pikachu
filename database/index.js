@@ -1,5 +1,10 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/budgetchef');
+
+if (process.env.NODE_ENV === 'production') {
+  mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
+} else {
+  mongoose.connect('mongodb://localhost/budgetchef');
+}
 
 var db = mongoose.connection;
 
@@ -61,5 +66,5 @@ var saveToMongo = function(recipes, callback) {
 
 module.exports = {
   selectAll: selectAll,
-  saveToMongo: saveToMongo, 
+  saveToMongo: saveToMongo,
 };
