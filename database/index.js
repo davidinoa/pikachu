@@ -12,6 +12,7 @@ db.once('open', function() {
 });
 
 var recipeSchema = mongoose.Schema({
+  recipeId: { type: String, required: true, unique: true}, // id
   recipeName: { type: String, required: true }, // title
   servings: { type: Number, required: true }, // servings
   servingPrice: { type: Number, required: true }, // pricePerServing
@@ -36,4 +37,29 @@ var selectAll = function(callback) {
   });
 };
 
-module.exports.selectAll = selectAll;
+var saveToMongo = function(recipes, callback) {
+  recipes.forEach(function(recipe) {
+    new Recipe({
+      recipeId: recipe.id,
+      recipeName: recipe.title,
+      servings: recipe.servings,
+      servingPrice: recipe.pricePerServing,
+      recipeUrl: recipe.sourceUrl,
+      imageUrl: recipe.image,
+      popularity: recipe.aggregateLikes,
+      healthScore: recipe.healthScore,
+      cuisines: recipe.cuisines,
+      dishTypes: recipe.dishTypes,
+      diets: recipe.diets
+    })
+      .save(function(err) {
+        if (err) { return console.error(err); }
+        console.log('document saved');
+      });
+  });
+};
+
+module.exports = {
+  selectAll: selectAll,
+  saveToMongo: saveToMongo, 
+};
