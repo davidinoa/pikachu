@@ -38,9 +38,9 @@
 From within the root directory:
 
 ```sh
-npm install -g bower
 npm install
-bower install
+npm install request --save
+
 ```
 
 ### Roadmap
