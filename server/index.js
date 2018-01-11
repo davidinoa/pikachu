@@ -6,16 +6,22 @@ var app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if (err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
+app.post('/recipes', (req, res) => {
+  // get 12 recipes with user input
+  // send data fetched from Mongo back to the client
+    // error handling 
 });
+
+// For componentDidMount - (possibility)
+// app.get('/recipes', function (req, res) {
+//   recipes.selectAll(function(err, data) {
+//     if (err) {
+//       res.sendStatus(500);
+//     } else {
+//       res.json(data);
+//     }
+//   });
+// });
 
 
 let PORT = process.env.PORT || 3000;

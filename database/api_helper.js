@@ -17,6 +17,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // get 10 results per keyword query
 let getRecipesByKeyword = (keyword, callback) => {
+  console.log('getRecipesByKeyword is running');
   let options = {
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=10&query=' + keyword,
     headers: {
@@ -42,9 +43,10 @@ let getRecipesByKeyword = (keyword, callback) => {
 // get recipe info in bulk based on recipe ids.
 let getRecipeInfoByIds = (recipes, callback) => {
   // creates recipeIds for search parameter
+  // recipes = JSON.parse(recipes).results;
   let recipeIds = recipes.map((recipe, i) => {
-    if (i !== recipes.length - 1) {
-      return recipe.id + '%';
+    if (i !== (recipes.length - 1)) {
+      return recipe.id + '%2C';
     } else {
       return recipe.id;
     }
@@ -54,8 +56,8 @@ let getRecipeInfoByIds = (recipes, callback) => {
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/informationBulk?ids=' + recipeIds,
     headers: {
       'User-Agent': 'request',
-      'X-Mashape-Key': config.PROJECT_KEY,
-      'X-Mashape-Host': config.PROJECT_HOST
+      'X-Mashape-Key': PROJECT_KEY,
+      'X-Mashape-Host': PROJECT_HOST
     }
   };
 
@@ -66,6 +68,8 @@ let getRecipeInfoByIds = (recipes, callback) => {
       callback(error, null);
     }
   };
+
+  request(options, requestHandler);
 };
 
 module.exports = {
