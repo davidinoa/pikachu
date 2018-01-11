@@ -28,7 +28,7 @@
     "rapidapi-connect": "0.0.6",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
     "semantic-ui-react": "^0.77.2"
   }
 }
