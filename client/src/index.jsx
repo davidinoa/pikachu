@@ -50,7 +50,7 @@ class App extends React.Component {
           data
         );
         if (data) {
-          this.setState({ items: [...that.state.items, data] });
+          this.setState({ items: [...that.state.items, ...data] });
         }
       })
       .fail((jqXHR, textStatus, errorThrown) => {
@@ -78,7 +78,10 @@ class App extends React.Component {
           BudgetChef
           <Header.Subheader>for when you're cheap AF</Header.Subheader>
         </Header>
-        <SearchIndex results={this.state.items} onSearch={this.search.bind(this)} />
+        <SearchIndex
+          results={this.state.items}
+          onSearch={this.search.bind(this)}
+        />
       </div>
     );
   }

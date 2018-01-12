@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import faker from 'faker';
 import React from 'react';
-import { Button, Container, Input, Label } from 'semantic-ui-react';
+import { Button, Container, Grid, Input, Label } from 'semantic-ui-react';
 import List from './List.jsx';
 
 const source = _.times(5, () => ({
@@ -84,6 +84,7 @@ class SearchIndex extends React.Component {
 
   render() {
     const { isLoading, value } = this.state;
+    let start = 0;
 
     return (
       <div style={{ textAlign: 'center', margin: '0 auto' }}>
@@ -121,8 +122,15 @@ class SearchIndex extends React.Component {
               </Button>
             </Input>
           </form>
+          <h4> Recipes </h4>
+          <Grid>
+            {this.props.results.map((result, i) => {
+              if (i % 4 === 0 && i < this.props.results.length - 1) {
+                return <List items={this.props.results.slice(i, i + 4)} />;
+              }
+            })}
+          </Grid>
         </Container>
-        <List items={this.props.results} />
       </div>
     );
   }
