@@ -44,7 +44,7 @@ var Recipe = mongoose.model('Recipe', recipeSchema);
 //   });
 // };
 
-
+// fix function to send data back
 var saveRecipesToMongo = function(recipes, callback) {
   recipes.forEach(function(recipe) {
     new Recipe({
@@ -63,16 +63,17 @@ var saveRecipesToMongo = function(recipes, callback) {
       .save(function(err) {
         if (err) { return console.log('document already exists'); }
         console.log('document saved');
+        callback();
       });
   });
 };
 
-const getDataFromAPI = (keyword) => {
-  getRecipesByKeyword(keyword, (err, results) => {
+const getDataFromAPI = (keywords, callback) => {
+  getRecipesByKeyword(keywords, (err, results) => {
     if (err) { return console.error(err); }
     getRecipeInfoByIds(results, (err, data) => {
       if (err) { return console.error(err); }
-      saveRecipesToMongo(JSON.parse(data));
+      callback(JSON.parse(data));
     });
   });
 };
@@ -82,9 +83,6 @@ const getRecipesFromMongo = (budget, keyword, callback) => {
     .where('servingPrice').lt(budget)
     .sort('popularity')
     .then((recipes) => {
-      if (recipes.length < 12) {
-        getDataFromAPI(keyword);
-      }
       callback(recipes);
     })
     .catch((error) => console.error(error));
@@ -94,6 +92,6 @@ module.exports = {
   // selectAll: selectAll,
   saveRecipesToMongo: saveRecipesToMongo,
   getRecipesFromMongo: getRecipesFromMongo,
-  Recipe: Recipe
+  getDataFromAPI: getDataFromAPI
 };
 

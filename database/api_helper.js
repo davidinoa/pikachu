@@ -17,7 +17,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // get 10 results per keyword query
 let getRecipesByKeyword = (keyword, callback) => {
-  console.log('getRecipesByKeyword is running');
   let options = {
     url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?number=12&query=' + keyword,
     headers: {
