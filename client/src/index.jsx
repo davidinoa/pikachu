@@ -74,7 +74,7 @@ class App extends React.Component {
         </Button.Group>
         <h1 />
         <Header as="h2" textAlign="center">
-          <Image src="https://drive.google.com/file/d/1Fa0LLTFj8Vg-lBPGOqizvQhKKuowZtOv/view?usp=sharing" />
+          <Image src="https://lh6.googleusercontent.com/aeGEKKGsH7MNUR2Sj03yNvHmfxSbKIOcA9w2HmBRhhoQwor4i4J7rDIf8l9zfXxX2Os_NFZciuhjMHCUQyZO=w1302-h780-rw" />
           BudgetChef
           <Header.Subheader>for when you're cheap AF</Header.Subheader>
         </Header>
