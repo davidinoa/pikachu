@@ -8,7 +8,7 @@ const List = (props) => (
       return (
         <Grid.Column>
           <a href={item.recipeUrl}>
-            <Image src={item.imageUrl} />
+            <Image src={item.imageUrl} style={{borderRadius:'10px'}} />
           </a>
         </Grid.Column>
       );
