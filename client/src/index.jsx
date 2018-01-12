@@ -78,7 +78,7 @@ class App extends React.Component {
           BudgetChef
           <Header.Subheader>for when you're cheap AF</Header.Subheader>
         </Header>
-        <SearchIndex onSearch={this.search.bind(this)} />
+        <SearchIndex results={this.state.items} onSearch={this.search.bind(this)} />
       </div>
     );
   }

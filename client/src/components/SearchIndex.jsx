@@ -18,7 +18,6 @@ class SearchIndex extends React.Component {
       budget: 0,
       isLoading: false,
       keywords: '',
-      results: [],
       servings: 0,
       value: ''
     };
@@ -31,15 +30,14 @@ class SearchIndex extends React.Component {
   resetComponent() {
     this.setState({
       isLoading: false,
-      results: [],
       value: ''
     });
   }
 
-  handleResultSelect(e, { result }) {
-    this.setState({
-      value: result.title
-    });
+  handleResultSelect(e) {
+    // this.setState({
+    //   value: result.title
+    // });
   }
   // why destructure result and value
   handleSearchChange(e, { value }) {
@@ -54,13 +52,12 @@ class SearchIndex extends React.Component {
       }
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
-      const isMatch = (result) => {
-        return re.test(result.title);
-      };
+      // const isMatch = (result) => {
+      //   return re.test(result.title);
+      // };
 
       this.setState({
-        isLoading: false,
-        results: _.filter(source, isMatch)
+        isLoading: false
       });
     }, 500);
   }
@@ -86,7 +83,7 @@ class SearchIndex extends React.Component {
   }
 
   render() {
-    const { isLoading, value, results } = this.state;
+    const { isLoading, value } = this.state;
 
     return (
       <div style={{ textAlign: 'center', margin: '0 auto' }}>
@@ -125,7 +122,7 @@ class SearchIndex extends React.Component {
             </Input>
           </form>
         </Container>
-        <List items={this.state.results} />
+        <List items={this.props.results} />
       </div>
     );
   }
