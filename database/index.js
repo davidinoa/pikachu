@@ -93,6 +93,7 @@ const getRecipesFromMongo = (budget, keyword, callback) => {
 module.exports = {
   // selectAll: selectAll,
   saveRecipesToMongo: saveRecipesToMongo,
-  getRecipesFromMongo: getRecipesFromMongo
+  getRecipesFromMongo: getRecipesFromMongo,
+  Recipe: Recipe
 };
 
