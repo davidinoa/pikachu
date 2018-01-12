@@ -11,7 +11,7 @@ const List = (props) => (
         <Grid.Column>
           <a href={item.recipeUrl}>
             <Image src={item.imageUrl} />
-            <ListItem item={item} onClick={props.onClick} />
+            <ListItem item={item} />
           </a>
         </Grid.Column>
       );
