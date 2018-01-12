@@ -16,7 +16,7 @@ class App extends React.Component {
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: '/items',
+      url: '/recipes',
       contentType: 'application/json',
       success: (data) => {
         console.log('this is component did mount data: ', data);
@@ -31,11 +31,11 @@ class App extends React.Component {
   }
 
   search(budget, keywords, servings) {
-    console.log(`${item} was added`);
+    console.log(`${budget} ${keywords} ${servings} was added`);
     var that = this;
     $.ajax({
       method: 'POST',
-      url: '/items',
+      url: '/recipes',
       data: JSON.stringify({
         budget: budget,
         keywords: keywords,
