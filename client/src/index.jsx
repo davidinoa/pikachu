@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import SearchIndex from './components/SearchIndex.jsx';
+import Filters from './components/Filters.jsx';
 import { Button, Header, Image } from 'semantic-ui-react';
 
 class App extends React.Component {
@@ -58,6 +59,8 @@ class App extends React.Component {
       });
   }
 
+  filter() {}
+
   render() {
     return (
       <div>
@@ -74,7 +77,7 @@ class App extends React.Component {
         </Button.Group>
         <h1 />
         <Header as="h2" textAlign="center">
-          <Image src="https://lh6.googleusercontent.com/aeGEKKGsH7MNUR2Sj03yNvHmfxSbKIOcA9w2HmBRhhoQwor4i4J7rDIf8l9zfXxX2Os_NFZciuhjMHCUQyZO=w1302-h780-rw" />
+          <Image src="https://i.imgur.com/EaTtIHO.png" />
           BudgetChef
           <Header.Subheader>for when you're cheap AF</Header.Subheader>
         </Header>
@@ -82,6 +85,7 @@ class App extends React.Component {
           results={this.state.items}
           onSearch={this.search.bind(this)}
         />
+        <Filters onFilter={this.filter.bind(this)} />
       </div>
     );
   }
