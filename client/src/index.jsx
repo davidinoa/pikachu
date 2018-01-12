@@ -75,12 +75,11 @@ class App extends React.Component {
             Login / Logout
           </Button>
         </Button.Group>
-        <h1 />
-        <Header as="h2" textAlign="center">
-          <Image src="https://i.imgur.com/EaTtIHO.png" />
-          BudgetChef
-          <Header.Subheader>for when you're cheap AF</Header.Subheader>
-        </Header>
+          <Header as="h2" textAlign="center">
+            <Image src="https://i.imgur.com/EaTtIHO.png" />
+            BudgetChef
+            <Header.Subheader>for when you're cheap AF</Header.Subheader>
+          </Header>
         <SearchIndex
           results={this.state.items}
           onSearch={this.search.bind(this)}

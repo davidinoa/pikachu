@@ -112,7 +112,7 @@ class SearchIndex extends React.Component {
             />
             <Input
               name="keywords"
-              placeholder="Cuisine (optional)"
+              placeholder="Dish (optional)"
               value={this.state.keywords}
               onChange={this.onChange.bind(this)}
             >
