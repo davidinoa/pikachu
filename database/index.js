@@ -19,7 +19,7 @@ db.once('open', function() {
 });
 
 var recipeSchema = mongoose.Schema({
-  recipeId: { type: String, required: true, unique: true}, // id
+  recipeId: { type: String, required: true, unique: true }, // id
   recipeName: { type: String, required: true }, // title
   servings: { type: Number, required: true }, // servings
   servingPrice: { type: Number, required: true }, // pricePerServing
@@ -59,28 +59,34 @@ var saveRecipesToMongo = function(recipes, callback) {
       cuisines: recipe.cuisines,
       dishTypes: recipe.dishTypes,
       diets: recipe.diets
-    })
-      .save(function(err) {
-        if (err) { return console.log('document already exists'); }
-        console.log('document saved');
-        callback();
-      });
+    }).save(function(err) {
+      if (err) {
+        return console.log('document already exists');
+      }
+      console.log('document saved');
+      callback();
+    });
   });
 };
 
 const getDataFromAPI = (keywords, callback) => {
   getRecipesByKeyword(keywords, (err, results) => {
-    if (err) { return console.error(err); }
+    if (err) {
+      return console.error(err);
+    }
     getRecipeInfoByIds(results, (err, data) => {
-      if (err) { return console.error(err); }
+      if (err) {
+        return console.error(err);
+      }
       callback(JSON.parse(data));
     });
   });
 };
 
 const getRecipesFromMongo = (budget, keyword, callback) => {
-  Recipe.find({recipeName: new RegExp(keyword, 'i')})
-    .where('servingPrice').lt(budget)
+  Recipe.find({ recipeName: new RegExp(keyword, 'i') })
+    .where('servingPrice')
+    .lt(budget)
     .sort('popularity')
     .then((recipes) => {
       callback(recipes);
@@ -94,4 +100,3 @@ module.exports = {
   getRecipesFromMongo: getRecipesFromMongo,
   getDataFromAPI: getDataFromAPI
 };
-

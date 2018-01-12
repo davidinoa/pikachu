@@ -73,12 +73,10 @@ class App extends React.Component {
           </Button>
         </Button.Group>
         <h1 />
-        <Header as='h2' textAlign='center'>
-          <Image src='https://drive.google.com/file/d/1Fa0LLTFj8Vg-lBPGOqizvQhKKuowZtOv/view?usp=sharing' />
+        <Header as="h2" textAlign="center">
+          <Image src="https://drive.google.com/file/d/1Fa0LLTFj8Vg-lBPGOqizvQhKKuowZtOv/view?usp=sharing" />
           BudgetChef
-          <Header.Subheader>
-            for when you're cheap AF
-          </Header.Subheader>
+          <Header.Subheader>for when you're cheap AF</Header.Subheader>
         </Header>
         <SearchIndex onSearch={this.search.bind(this)} />
       </div>

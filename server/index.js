@@ -7,7 +7,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 // For componentDidMount - (possibility)
 // app.get('/recipes', function (req, res) {
 //   recipes.selectAll(function(err, data) {
@@ -25,25 +24,22 @@ app.post('/recipes', (req, res, next) => {
 
   database.getRecipesFromMongo(budget, keywords, (data) => {
     if (data.length >= 12) {
-      console.log('there are more than 12 results.')
-      res.status(201).json(data);
+      console.log('there are more than 12 results.');
+      res.status(200).json(data);
     } else {
-      console.log('getting data from API')
+      console.log('getting data from API');
       database.getDataFromAPI(keywords, (apidata) => {
         database.saveRecipesToMongo(apidata, () => {
-          console.log('getting data from database')
+          console.log('getting data from database');
           database.getRecipesFromMongo(budget, keywords, (data) => {
-            console.log('found data in database')
-            res.status(201).json(data);
+            console.log('found data in database');
+            res.status(200).json(data);
           });
         });
       });
     }
   });
-
 });
-
-
 
 let PORT = process.env.PORT || 3000;
 
