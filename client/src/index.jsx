@@ -59,9 +59,30 @@ class App extends React.Component {
       });
   }
 
-  filter() {}
+  filter(option) {   // cusine/ meal / diet
+    console.log(option);
+
+    this.setState({
+      items: this.state.items.filter(item => {
+        // if option is a cuisine
+          // do something
+        // if option is meal
+          // do something
+        // if option is diet
+          // do something
+      })
+    });
+  }
 
   render() {
+    let filters;
+
+    if (this.state.items.length > 0) {
+      filters = <Filters onFilter={this.filter.bind(this)} results={this.state.items}/>;
+    } else {
+      console.log('no matches.');
+    }
+
     return (
       <div>
         <Button.Group floated="right">
@@ -84,7 +105,9 @@ class App extends React.Component {
           results={this.state.items}
           onSearch={this.search.bind(this)}
         />
-        <Filters onFilter={this.filter.bind(this)} />
+
+        {filters}
+
       </div>
     );
   }
