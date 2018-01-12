@@ -73,7 +73,7 @@ class App extends React.Component {
           </Button>
         </Button.Group>
         <h1 />
-        <Header as='h2' icon>
+        <Header as='h2' textAlign='center'>
           <Image src='https://drive.google.com/file/d/1Fa0LLTFj8Vg-lBPGOqizvQhKKuowZtOv/view?usp=sharing' />
           BudgetChef
           <Header.Subheader>
