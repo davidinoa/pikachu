@@ -10,7 +10,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      displayItems: []
     };
   }
 
@@ -46,12 +47,16 @@ class App extends React.Component {
     })
       .done((data) => {
         // debugger;
-        console.log(
-          'these are the new items, items being set to state: ',
-          data
-        );
+        // console.log(
+        //   'these are the new items, items being set to state: ',
+        //   data
+        // );
         if (data) {
-          this.setState({ items: [...that.state.items, ...data] });
+          this.setState({
+            items: [...that.state.items, ...data],
+            allRecipes: [...that.state.items, ...data]
+          });
+
         }
       })
       .fail((jqXHR, textStatus, errorThrown) => {
@@ -59,26 +64,33 @@ class App extends React.Component {
       });
   }
 
-  filter(option) {   // cusine/ meal / diet
-    console.log(option);
+
+  filter(option) {
+    this.resetFilter();
+
+    let filteredItems = this.state.items.filter(item => {
+      return (item.cuisines.includes(option) || item.dishTypes.includes(option) || item.diets.includes(option));
+    });
 
     this.setState({
-      items: this.state.items.filter(item => {
-        // if option is a cuisine
-          // do something
-        // if option is meal
-          // do something
-        // if option is diet
-          // do something
-      })
+      items: filteredItems
     });
+  }
+
+  // should be triggered when you click on new filter
+  resetFilter() {
+    let baseState = {
+      items: this.state.allRecipes
+    };
+
+    this.setState(baseState);
   }
 
   render() {
     let filters;
 
     if (this.state.items.length > 0) {
-      filters = <Filters onFilter={this.filter.bind(this)} results={this.state.items}/>;
+      filters = <Filters onFilter={this.filter.bind(this)} results={this.state.items} />;
     } else {
       console.log('no matches.');
     }
@@ -96,11 +108,11 @@ class App extends React.Component {
             Login / Logout
           </Button>
         </Button.Group>
-          <Header as="h2" textAlign="center">
-            <Image src="https://i.imgur.com/EaTtIHO.png" />
-            BudgetChef
-            <Header.Subheader>for when you're cheap AF</Header.Subheader>
-          </Header>
+        <Header as="h2" textAlign="center">
+          <Image src="https://i.imgur.com/EaTtIHO.png" />
+          BudgetChef
+          <Header.Subheader>for when you're cheap AF</Header.Subheader>
+        </Header>
         <SearchIndex
           results={this.state.items}
           onSearch={this.search.bind(this)}
