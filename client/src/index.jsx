@@ -86,13 +86,13 @@ class App extends React.Component {
     return (
       <div>
         <Button.Group floated="right">
-          <Button basic color="olive">
+          <Button inverted>
             User
           </Button>
-          <Button basic color="olive">
+          <Button inverted>
             Favorites
           </Button>
-          <Button basic color="olive">
+          <Button inverted>
             Login / Logout
           </Button>
         </Button.Group>
