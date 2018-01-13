@@ -4,7 +4,7 @@ import $ from 'jquery';
 import List from './components/List.jsx';
 import SearchIndex from './components/SearchIndex.jsx';
 import Filters from './components/Filters.jsx';
-import { Button, Header, Image } from 'semantic-ui-react';
+import { Button, Container, Grid, Header, Image } from 'semantic-ui-react';
 
 class App extends React.Component {
   constructor(props) {
@@ -59,17 +59,18 @@ class App extends React.Component {
       });
   }
 
-  filter(option) {   // cusine/ meal / diet
+  filter(option) {
+    // cusine/ meal / diet
     console.log(option);
 
     this.setState({
-      items: this.state.items.filter(item => {
+      items: this.state.items.filter((item) => {
         // if option is a cuisine
-          // do something
+        // do something
         // if option is meal
-          // do something
+        // do something
         // if option is diet
-          // do something
+        // do something
       })
     });
   }
@@ -78,36 +79,52 @@ class App extends React.Component {
     let filters;
 
     if (this.state.items.length > 0) {
-      filters = <Filters onFilter={this.filter.bind(this)} results={this.state.items}/>;
+      filters = (
+        <Filters onFilter={this.filter.bind(this)} results={this.state.items} />
+      );
     } else {
       console.log('no matches.');
     }
 
     return (
       <div>
-        <Button.Group floated="right">
-          <Button inverted>
-            User
-          </Button>
-          <Button inverted>
-            Favorites
-          </Button>
-          <Button inverted>
-            Login / Logout
-          </Button>
-        </Button.Group>
+        <div
+          className="jumbotron jumbotron-fluid"
+          style={{
+            width: 'calc(100wh)',
+            height: 'calc(35vh)',
+            backgroundImage: 'url(https://i.imgur.com/74RuLGN.jpg)',
+            backgroundSize: 'cover',
+            textAlign: 'center'
+          }}
+        >
+          <Button.Group floated="right">
+            <Button inverted>User</Button>
+            <Button inverted>Favorites</Button>
+            <Button inverted>Login / Logout</Button>
+          </Button.Group>
           <Header as="h2" textAlign="center">
             <Image src="https://i.imgur.com/EaTtIHO.png" />
             BudgetChef
             <Header.Subheader>for when you're cheap AF</Header.Subheader>
           </Header>
-        <SearchIndex
-          results={this.state.items}
-          onSearch={this.search.bind(this)}
-        />
+          <SearchIndex
+            results={this.state.items}
+            onSearch={this.search.bind(this)}
+          />
+        </div>
+        <Container style={{ textAlign: 'center' }}>
+          <h4> Recipes </h4>
+          {filters}
 
-        {filters}
-
+          <Grid>
+            {this.state.items.map((item, i) => {
+              if (i % 4 === 0 && i < this.state.items.length - 1) {
+                return <List items={this.state.items.slice(i, i + 4)} />;
+              }
+            })}
+          </Grid>
+        </Container>
       </div>
     );
   }

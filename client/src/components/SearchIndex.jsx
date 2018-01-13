@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import faker from 'faker';
 import React from 'react';
-import { Button, Container, Grid, Input, Label } from 'semantic-ui-react';
+import { Button, Input, Label } from 'semantic-ui-react';
 import List from './List.jsx';
 
 const source = _.times(5, () => ({
@@ -84,53 +84,42 @@ class SearchIndex extends React.Component {
 
   render() {
     const { isLoading, value } = this.state;
-    let start = 0;
 
     return (
-      <div style={{ textAlign: 'center', margin: '0 auto' }}>
-        <Container>
-          <form onSubmit={this.onSubmit.bind(this)}>
-            <Input
-              name="budget"
-              labelPosition="right"
-              type="text"
-              placeholder="Amount"
-              value={this.state.budget}
-              onChange={this.onChange.bind(this)}
-            >
-              <Label basic>$</Label>
-              <input />
-              <Label basic>.00</Label>
-            </Input>
-            <Input
-              name="servings"
-              label={{ basic: true, content: 'servings' }}
-              labelPosition="right"
-              placeholder="Enter servings..."
-              value={this.state.servings}
-              onChange={this.onChange.bind(this)}
-            />
-            <Input
-              name="keywords"
-              placeholder="Dish (optional)"
-              value={this.state.keywords}
-              onChange={this.onChange.bind(this)}
-            >
-              <input />
-              <Button type="submit" color="red" style={{borderRadius:'5px'}}>
-                Search
-              </Button>
-            </Input>
-          </form>
-          <h4> Recipes </h4>
-          <Grid>
-            {this.props.results.map((result, i) => {
-              if (i % 4 === 0 && i < this.props.results.length - 1) {
-                return <List items={this.props.results.slice(i, i + 4)} />;
-              }
-            })}
-          </Grid>
-        </Container>
+      <div>
+        <form onSubmit={this.onSubmit.bind(this)}>
+          <Input
+            name="budget"
+            labelPosition="right"
+            type="text"
+            placeholder="Amount"
+            value={this.state.budget}
+            onChange={this.onChange.bind(this)}
+          >
+            <Label basic>$</Label>
+            <input />
+            <Label basic>.00</Label>
+          </Input>
+          <Input
+            name="servings"
+            label={{ basic: true, content: 'servings' }}
+            labelPosition="right"
+            placeholder="Enter servings..."
+            value={this.state.servings}
+            onChange={this.onChange.bind(this)}
+          />
+          <Input
+            name="keywords"
+            placeholder="Dish (optional)"
+            value={this.state.keywords}
+            onChange={this.onChange.bind(this)}
+          >
+            <input />
+            <Button type="submit" color="red" style={{ borderRadius: '5px' }}>
+              Search
+            </Button>
+          </Input>
+        </form>
       </div>
     );
   }
