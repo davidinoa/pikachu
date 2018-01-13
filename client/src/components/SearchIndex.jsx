@@ -117,7 +117,7 @@ class SearchIndex extends React.Component {
               onChange={this.onChange.bind(this)}
             >
               <input />
-              <Button type="submit" color="olive">
+              <Button type="submit" color="red" style={{borderRadius:'5px'}}>
                 Search
               </Button>
             </Input>
