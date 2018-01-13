@@ -6,8 +6,6 @@ class Filters extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props.results);
-
     this.state = {
       cuisineArrays: this.props.results.map((recipe) => recipe.cuisines),
       dietArrays: this.props.results.map((recipe) => recipe.diets),
@@ -37,6 +35,7 @@ class Filters extends React.Component {
                       );
                     }
                   )}
+
                 </Dropdown.Menu>
               </Dropdown>
             </Dropdown.Item>
@@ -75,6 +74,7 @@ class Filters extends React.Component {
                       );
                     }
                   )}
+
                 </Dropdown.Menu>
               </Dropdown>
             </Dropdown.Item>

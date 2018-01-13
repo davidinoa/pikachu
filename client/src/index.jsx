@@ -10,7 +10,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      displayItems: []
     };
   }
 
@@ -46,12 +47,16 @@ class App extends React.Component {
     })
       .done((data) => {
         // debugger;
-        console.log(
-          'these are the new items, items being set to state: ',
-          data
-        );
+        // console.log(
+        //   'these are the new items, items being set to state: ',
+        //   data
+        // );
         if (data) {
-          this.setState({ items: [...that.state.items, ...data] });
+          this.setState({
+            items: [...that.state.items, ...data],
+            allRecipes: [...that.state.items, ...data]
+          });
+
         }
       })
       .fail((jqXHR, textStatus, errorThrown) => {
@@ -60,19 +65,25 @@ class App extends React.Component {
   }
 
   filter(option) {
-    // cusine/ meal / diet
-    console.log(option);
+    this.resetFilter();
+
+    let filteredItems = this.state.items.filter(item => {
+      return (item.cuisines.includes(option) || item.dishTypes.includes(option) || item.diets.includes(option));
+    });
 
     this.setState({
-      items: this.state.items.filter((item) => {
-        // if option is a cuisine
-        // do something
-        // if option is meal
-        // do something
-        // if option is diet
-        // do something
-      })
+      items: filteredItems
+
     });
+  }
+
+  // should be triggered when you click on new filter
+  resetFilter() {
+    let baseState = {
+      items: this.state.allRecipes
+    };
+
+    this.setState(baseState);
   }
 
   render() {
@@ -116,7 +127,6 @@ class App extends React.Component {
         <Container style={{ textAlign: 'center' }}>
           <h4> Recipes </h4>
           {filters}
-
           <Grid>
             {this.state.items.map((item, i) => {
               if (i % 4 === 0 && i < this.state.items.length - 1) {
