@@ -70,7 +70,7 @@ class App extends React.Component {
         this.setState({
           items: this.state.originalItems
         })
-      );   
+      );
     }).then(() => {
       let filteredItems = this.state.items.filter(item => {
         return (item.cuisines.includes(option) || item.dishTypes.includes(option) || item.diets.includes(option));
