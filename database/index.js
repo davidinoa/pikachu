@@ -34,16 +34,6 @@ var recipeSchema = mongoose.Schema({
 
 var Recipe = mongoose.model('Recipe', recipeSchema);
 
-// var selectAll = function(callback) {
-//   Recipe.find({}, function(err, recipes) {
-//     if (err) {
-//       callback(err, null);
-//     } else {
-//       callback(null, recipes);
-//     }
-//   });
-// };
-
 // fix function to send data back
 var saveRecipesToMongo = function(recipes, callback) {
   recipes.forEach(function(recipe) {
@@ -95,7 +85,6 @@ const getRecipesFromMongo = (budget, keyword, callback) => {
 };
 
 module.exports = {
-  // selectAll: selectAll,
   saveRecipesToMongo: saveRecipesToMongo,
   getRecipesFromMongo: getRecipesFromMongo,
   getDataFromAPI: getDataFromAPI
