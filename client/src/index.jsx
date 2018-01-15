@@ -110,7 +110,7 @@ class App extends React.Component {
           }}
         >
           <Header as="h2" textAlign="center">
-            <Image src="https://i.imgur.com/EaTtIHO.png" />
+            <Image src="https://i.imgur.com/hbpXFsF.png" />
             BudgetChef
             <Header.Subheader>for when you're cheap AF</Header.Subheader>
           </Header>
