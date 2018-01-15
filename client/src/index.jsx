@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       items: [],
-      displayItems: []
+      originalItems: []
     };
   }
 
@@ -54,7 +54,7 @@ class App extends React.Component {
         if (data) {
           this.setState({
             items: [...that.state.items, ...data],
-            allRecipes: [...that.state.items, ...data]
+            originalItems: [...that.state.items, ...data]
           });
 
         }
@@ -65,25 +65,21 @@ class App extends React.Component {
   }
 
   filter(option) {
-    this.resetFilter();
+    new Promise((resolve, reject) => {
+      resolve(
+        this.setState({
+          items: this.state.originalItems
+        })
+      );   
+    }).then(() => {
+      let filteredItems = this.state.items.filter(item => {
+        return (item.cuisines.includes(option) || item.dishTypes.includes(option) || item.diets.includes(option));
+      });
 
-    let filteredItems = this.state.items.filter(item => {
-      return (item.cuisines.includes(option) || item.dishTypes.includes(option) || item.diets.includes(option));
+      this.setState({
+        items: filteredItems
+      });
     });
-
-    this.setState({
-      items: filteredItems
-
-    });
-  }
-
-  // should be triggered when you click on new filter
-  resetFilter() {
-    let baseState = {
-      items: this.state.allRecipes
-    };
-
-    this.setState(baseState);
   }
 
   render() {
