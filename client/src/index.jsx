@@ -53,7 +53,7 @@ class App extends React.Component {
         // );
         if (data) {
           this.setState({
-            items: [...that.state.items, ...data],
+            items: [...data],
             originalItems: [...that.state.items, ...data]
           });
 
@@ -105,11 +105,7 @@ class App extends React.Component {
             textAlign: 'center'
           }}
         >
-          <Header as="h2" textAlign="center">
-            <Image src="https://i.imgur.com/EaTtIHO.png" />
-            BudgetChef
-            <Header.Subheader>for when you're cheap AF</Header.Subheader>
-          </Header>
+          <Image size="medium" src="https://i.imgur.com/hbpXFsF.png" />
           <SearchIndex
             results={this.state.items}
             onSearch={this.search.bind(this)}
