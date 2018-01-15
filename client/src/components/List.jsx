@@ -42,10 +42,15 @@ class List extends React.Component {
                       style={{
                         filter: 'alpha(opacity=50)',
                         padding: '10px',
-                        margin: '0px'
+                        margin: '0px',
+                        textAlign: 'left'
                       }}
                     >
-                      {item.recipeName} Price (per Serving):{item.servingPrice}{' '}
+                      {item.recipeName} {'\n'}
+                      <p></p>
+                      <p>
+                      Price (per Serving) : ${item.servingPrice}{' '}
+                      </p>
                     </p>
                   </div>
                 </a>

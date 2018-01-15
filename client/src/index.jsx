@@ -109,11 +109,6 @@ class App extends React.Component {
             textAlign: 'center'
           }}
         >
-          <Button.Group floated="right">
-            <Button inverted>User</Button>
-            <Button inverted>Favorites</Button>
-            <Button inverted>Login / Logout</Button>
-          </Button.Group>
           <Header as="h2" textAlign="center">
             <Image src="https://i.imgur.com/EaTtIHO.png" />
             BudgetChef
