@@ -105,7 +105,7 @@ class App extends React.Component {
             textAlign: 'center'
           }}
         >
-          <Image centered size="medium" src="https://i.imgur.com/hbpXFsF.png" />
+          <Image centered size="medium" src="https://preview.ibb.co/dUso7R/budgetchefv2.png" />
           <SearchIndex
             results={this.state.items}
             onSearch={this.search.bind(this)}
