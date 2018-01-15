@@ -39,7 +39,7 @@ class App extends React.Component {
       method: 'POST',
       url: '/recipes',
       data: JSON.stringify({
-        budget: budget,
+        budget: (budget / servings),
         keywords: keywords,
         servings: servings
       }),
