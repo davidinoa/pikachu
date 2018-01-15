@@ -105,14 +105,13 @@ class App extends React.Component {
             textAlign: 'center'
           }}
         >
-          <Image size="medium" src="https://i.imgur.com/hbpXFsF.png" />
+          <Image centered size="medium" src="https://i.imgur.com/hbpXFsF.png" />
           <SearchIndex
             results={this.state.items}
             onSearch={this.search.bind(this)}
           />
         </div>
         <Container style={{ textAlign: 'center' }}>
-          <h4> Recipes </h4>
           {filters}
           <Grid>
             {this.state.items.map((item, i) => {
