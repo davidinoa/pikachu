@@ -12,10 +12,11 @@ if (process.env.NODE_ENV === 'production') {
   PROJECT_HOST = config.PROJECT_HOST;
 }
 
-// fetch recipes based on budget
-// example: user inputs $20 budget for 2 servings => get recipes with servingPrice of $10 or less.
 
-// get 10 results per keyword query
+// This function makes the request to API for up to 12 results matching provided keyword(s)
+// NOTE: You're allowed to make up to 50 API requests or 500 results per day, whichever comes first.
+// Rapid and Spoonacular will not notify you if you go over limit, so be extra careful.
+// (Store your API key in config.js and heroku's config variables.)
 let getRecipesByKeyword = (keyword, callback) => {
   let options = {
     url:
@@ -39,9 +40,11 @@ let getRecipesByKeyword = (keyword, callback) => {
   request(options, requestHandler);
 };
 
-// getRecipesByKeyword('chicken', console.log);
 
-// get recipe info in bulk based on recipe ids.
+
+// This function makes another request to different API endpoint to get detailed recipe info in bulk based on
+// recipe ids (which are returned by getRecipesByKeyword method above).
+// NOTE: This function and the above function count as two separate API requests.
 let getRecipeInfoByIds = (recipes, callback) => {
   // creates recipeIds for search parameter
   recipes = JSON.parse(recipes).results;
@@ -55,6 +58,7 @@ let getRecipeInfoByIds = (recipes, callback) => {
     })
     .join('');
 
+  // (Uses the same API key as getRecipesByKeyword function)
   let options = {
     url:
       'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/informationBulk?ids=' +

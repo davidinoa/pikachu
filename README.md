@@ -20,16 +20,20 @@
 1. [Contributing](#contributing)
 
 ## Usage
+API:
+> Get Spoonacular's API key here: https://rapidapi.com/user/spoonacular/package/Recipe%20-%20Food%20-%20Nutrition/pricing
+> Add API key to config.js and Heroku's config variables
+> Be mindful of your API rate limit
 
-> Some usage instructions
 
 ## Requirements
 
-- Node 6.4.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 8.9.3
+- Npm 5.6.0
+- MongoDB 3.6.1
+- Express 4.15.0
+- React 15.4.2
+- Webpack 2.2.1
 
 ## Development
 
@@ -45,8 +49,11 @@ npm install request --save
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
-
+The project roadmap:
+> Phase 1: Search by budget & servings, and filter by cuisines, diets, & meal types
+> Phase 2: Search by existing ingredients, allow users to login/logout and favoriting recipes
+> Phase 3: Get suggestions on where to purchase ingredients with price comparisons
+> Phase 4: Eat better, for less
 
 ## Contributing
 
