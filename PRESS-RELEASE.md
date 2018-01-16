@@ -32,7 +32,7 @@ Once the project moves into development, the press release can be used as a touc
   > Give access to resources that cater to their custom specifications
 
 ## Quote from You ##
-  > "Eat better! For less."
+  > "We're coming for you, Blue Apron!"
 
 ## How to Get Started ##
   > Type how much are you willing to spent, how many people are you trying and serve, hit search and pick your favorite recipe
@@ -41,4 +41,4 @@ Once the project moves into development, the press release can be used as a touc
   > "Thanks to BudgetChef I've been able to save $112 on groceries and decrease my food waste... in just 2 weeks! Definitely been eating better! For less"
 
 ## Closing and Call to Action ##
-  > http://localhost:3000/ <=== Click here to start eating better. For less.
+  > https://budgetchef.herokuapp.com/ <=== Click here to start eating better. For less.

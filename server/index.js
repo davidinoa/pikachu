@@ -7,33 +7,24 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// For componentDidMount - (possibility)
-// app.get('/recipes', function (req, res) {
-//   recipes.selectAll(function(err, data) {
-//     if (err) {
-//       res.sendStatus(500);
-//     } else {
-//       res.json(data);
-//     }
-//   });
-// });
-
+// Server's POST route for user's input of budget and keywords (optional).
 app.post('/recipes', (req, res, next) => {
-  let keywords = req.body.keywords;
   let budget = req.body.budget;
+  let keywords = req.body.keywords;
 
+  // server pings database for results that match keywords and budget
   database.getRecipesFromMongo(budget, keywords, (data) => {
+    // if there are 12 or more results, send response to client
     if (data.length >= 12) {
-      console.log('there are more than 12 results.');
-      res.status(200).json(data);
+      res.json(data);
     } else {
-      console.log('getting data from API');
+      // if there are less than 12 results, ping API for more.
       database.getDataFromAPI(keywords, (apidata) => {
+        // ..and save to database
         database.saveRecipesToMongo(apidata, () => {
-          console.log('getting data from database');
+          // fetch new records that were just saved to database, and send them to client
           database.getRecipesFromMongo(budget, keywords, (data) => {
-            console.log('found data in database');
-            res.status(200).json(data);
+            res.json(data);
           });
         });
       });
