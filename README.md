@@ -25,6 +25,9 @@ API:
 > Add API key to config.js and Heroku's config variables
 > Be mindful of your API rate limit
 
+Database:
+> Install mLab as your production database: https://elements.heroku.com/addons/mongolab
+
 
 ## Requirements
 
