@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var getRecipesByKeyword = require('./api_helper').getRecipesByKeyword;
 var getRecipeInfoByIds = require('./api_helper').getRecipeInfoByIds;
 
+
+// When you install mLab as an add-on in Heroku, MONGODB_URI is automatically added as a Heroku's config var.
 if (process.env.NODE_ENV === 'production') {
   mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
 } else {
@@ -13,14 +15,14 @@ db.on('error', function() { console.log('mongoose connection error'); });
 db.once('open', function() { console.log('mongoose connected successfully'); });
 
 var recipeSchema = mongoose.Schema({
-  recipeId: { type: String, required: true, unique: true }, 
+  recipeId: { type: String, required: true, unique: true },
   recipeName: { type: String, required: true },
   servings: { type: Number, required: true },
   servingPrice: { type: Number, required: true },
   recipeUrl: { type: String, required: true },
   imageUrl: { type: String, required: true },
   popularity: { type: Number },
-  healthScore: { type: Number }, 
+  healthScore: { type: Number },
   cuisines: { type: Array },
   dishTypes: { type: Array },
   diets: { type: Array }
