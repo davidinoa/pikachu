@@ -1,4 +1,4 @@
-# Project Name
+# BudgetChef
 
 > An app that generates recipes based on user’s budget or available ingredients.
 
